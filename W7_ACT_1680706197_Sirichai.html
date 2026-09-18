@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>From Validiation</title>
+    <meta chaset="UTF-8">
+    <style>
+        .error-input {
+            border-color: red;
+            background-color: azure;
+        }
+        .error-text {
+            color: red;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h3>Form Validiation</h3>
+ 
+    <input type="text" id="some_input"><br>
+    <button id="calculate_btn">Calculate</button>
+    <script>
+        const calculateBtn = document.querySelector("#calculate_btn");
+        //calculateBtn.addEventListener("click",calculate);
+        calculateBtn.addEventListener("click",() => {
+            alert("Answer is 67")
+        });
+ 
+        function Calculate(){
+            alert("Answer is 67");
+        }
+ 
+        const someInput = document.querySelector("#some_input");
+        // Capture keydown event when focus an element
+        someInput.addEventListener("keydown", (e) => {
+        // The "e" parameter will give keyboard event information
+        console.log(`Key pressed: ${e.key}`);
+        });
+        // Capture keydown event anywhere on the page
+        document.addEventListener("keydown", (e) => {
+        console.log(`Key pressed: ${e.key}`);
+        });
+ 
+    doSomething(() => {
+    console.log("Task success")
+    });
+    doSomething(onTaskSuccess);
+    doSomething((data) => {
+ 
+    console.log("Task success " + data);
+        }, (errorLog) => {
+    console.log("Task error " + errorLog)
+        });
+    doSomething(onTaskSuccess, onTaskError);
+ 
+    function onTaskSuccess(data) {
+    console.log("Task complete " + data);
+}
+ 
+    function onTaskError(errorLog) {
+    console.log("Task error " + errorLog);
+}
+ 
+    doSomething(onTaskSuccess, onTaskError) ;
+    function doSomething(onSuccess, onError) {
+    let isSuccess = false;
+    if (isSuccess) {
+        onSuccess("Name is Arm");
+    } else {
+        onError("Data cannot found");
+    }
+}
+    </script>
+ 
+    <hr>
+    <form name="registration" onsubmit="return validateForm()">
+    Student ID: <br>
+    <input type="text" name="student_id"><br>
+    <span class="error-text" id="student_id_error">This is a error</span>
+    <br><br>
+    <button> Submit</button>
+    </form>
+ 
+    <script>
+        const studentIdEl =document.forms["registration"]["student_id"];
+        studentIdEl.addEventListener("blur", () => {
+ 
+        });
+ 
+       
+        function validateForm() {
+            const targetForm = document.forms["registration"];
+            const studentIdError = document.querySelector("#student_id_error");
+            const studentIdEl = targetForm["student_id"];
+            const studentId = StudentIdEl.value;
+            if (studentId == "") {
+                alert("Student id cannot empty");
+                studentIdEl.classList.add("error-input");
+                studentIdError.style.display = "inline";
+                studentIdError.textContent = "Student id cannot empty";
+                return false;
+            } else if (studentId.length != 10){
+                alert("Student id must lenght 10");
+                studentIdEl.classList.add("error-input");
+                studentIdError.style.display = "inline";
+                studentIdError.textContent = "Student id must lenght 10";
+                return false;
+            }
+            studentIdEl.style.display ="none";
+            studentIdEl.classList.remove("error-input");
+            return true;
+        }
+ 
+        function applyError(targetEl, targetError, errorMessage) {
+            alert(errorMessage);
+            targetEl.classList.add("error-input");
+            targetElError.style.display = "inline";
+            targetElError.textContent = errorMessage;
+        }
+    </script>
+ 
+</body>
+</html>
